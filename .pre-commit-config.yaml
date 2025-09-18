@@ -1,0 +1,43 @@
+repos:
+  # Auto-update pre-commit config
+  - repo: https://gitlab.com/vojko.pribudic.foss/pre-commit-update
+    rev: v0.8.0
+    hooks:
+      - id: pre-commit-update
+
+  # General purpose hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ['--maxkb=10240']  # set limit to 10MB
+
+  # Spell checking
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.36.2
+    hooks:
+      - id: typos
+        exclude: "^(Assets/Scenes/SampleScene|Library/|Temp/|obj/|Logs/|\\.gitignore$)"
+
+  # Forbid binary files in the repository
+  - repo: https://github.com/jumanjihouse/pre-commit-hooks
+    rev: 3.0.0
+    hooks:
+      - id: forbid-binary
+
+  # Unity-specific YAML linting
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.37.1
+    hooks:
+      - id: yamllint
+        args: ['-c=.yamllint.yml']
+        exclude: "^(Library/|Temp/|obj/|Logs/)"
+
+  # C# formatting
+  - repo: https://github.com/dotnet/format
+    rev: v8.0.453106
+    hooks:
+      - id: dotnet-format
