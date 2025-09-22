@@ -103,5 +103,9 @@ InitTestScene*.unity*
 /UserSettings
 .vsconfig
 
-# Exclude specific files (these are useful to have in the repo)
+# Exclude specific files (useful for CI/CD)
+!Assembly-CSharp.csproj
 !The-Herd.sln
+!Team[1-11].csproj
+!Shared.csproj
+!Events.csproj
