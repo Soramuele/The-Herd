@@ -102,3 +102,6 @@ InitTestScene*.unity*
 # Custom ignores for The Herd
 /UserSettings
 .vsconfig
+
+# Exclude specific files (these are useful to have in the repo)
+!The-Herd.sln
