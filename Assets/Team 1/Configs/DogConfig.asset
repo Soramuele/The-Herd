@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba6f94058f6ff4485c0c454a6577e8, type: 3}
   m_Name: DogConfig
   m_EditorClassIdentifier: 
-  _baseSpeed: 0
+  _minSpeed: 3
+  _maxSpeed: 20
+  _baseSpeed: 7
+  _rotationSpeed: 180
+  _slowDistance: 5
+  _maxDistance: 40
