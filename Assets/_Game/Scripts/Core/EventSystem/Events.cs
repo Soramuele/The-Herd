@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using UnityEngine;
 // The Game Events used across the Game.
 // Anytime there is a need for a new event, it should be added here.
@@ -18,7 +19,7 @@ namespace Core.Events
     /// <summary>
     /// To be removed later.
     /// </summary>
-    public class ExampleEvent : GameEvent 
+    public class ExampleEvent : GameEvent
     {
         private string _exampleField;
 
@@ -26,7 +27,7 @@ namespace Core.Events
         public string ExampleField => _exampleField;
 
 
-        public ExampleEvent(string exampleField) 
+        public ExampleEvent(string exampleField)
         {
             _exampleField = exampleField;
         }

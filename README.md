@@ -11,7 +11,6 @@ This project is made with Unity in `Unity 6000.0.58f1`.
 
 A top down horror game where you are a Shepherd herding sheep across the mountains during the old Yugoslavia. The sheep, your dog and you go through fields and villages while traveling the mountain. As you go the people and world around you becomes more and more cryptid. Your goal is to find a place to settle and avoid the war currently happening in your country.
 
-
 ## Table of Contents
 
 1. [Overview](#overview)
@@ -26,24 +25,22 @@ A top down horror game where you are a Shepherd herding sheep across the mountai
     - [Teams](#teams)
 4. [Support](#support)
 
-
 ## Overview
 
 This repository holds the project `The Herd` for the Project Game Design and Development minor.
-
 
 ### Getting Started
 
 It is recommended to use a linear branch structure and avoid as many ramifications as possible. Every team has its own branch to work with and can use it as their main branch, meaning it is possible to create other branches out of it. It is ***not*** recommended to fork the repository in order to avoid merging conflicts.
 
-#### Steps:
+#### Steps
+
 - Make sure `Unity 6000.0.58f1` is installed
 - Clone this repo on your computer
-- In the Unity Hub click the _Add_ button and navigate to the folder where your project is located
+- In the Unity Hub click the *Add* button and navigate to the folder where your project is located
 - Make sure you are in the right branch
 - Open your project
 - Enjoy
-
 
 ### Project Basics
 
@@ -68,8 +65,9 @@ Everything is organized inside the `Asset/*your-team*/` folder, keeping your fil
 Keep your folder organized! Create folders by type, so it's easy to find any file needed.
 
 **Benefits:**
+
 - Files are separated from packages, keeping everything organized
-- A consistent project structure aid readability and help recuding time searching for some file
+- A consistent project structure aid readability and help reducing time searching for some file
 - The project structure has consistency in presentation regardless of team location and language, or individual programmers
 - This helps connecting everything together for the final product
 
@@ -78,17 +76,17 @@ Keep your folder organized! Create folders by type, so it's easy to find any fil
 Coding standards define a programming style and helps you keep everything organized and clean. The Tech Department has already prepared a detailed document, so please refer to it for any information.
 
 This project has to follows:
+
 - Naming conventions
 - Formatting and Indentation
 - Use of namespaces
 - Comments
 - Design Patterns
 
-Writing clean and consistent code give benefits after just a short amount of work. This helps with implementation of new features, maintainance, minimalizing the amount of work when debugging and gives a clean communication between different programmers.
+Writing clean and consistent code give benefits after just a short amount of work. This helps with implementation of new features, maintenance, minimizing the amount of work when debugging and gives a clean communication between different programmers.
 
 > [!TIP]
 > Assembly definitions will be used for the main branch and therefore for the final project. Teams can still create their own, as long as it doesn't interfere with each other's work.
-
 
 ## GitHub
 
@@ -96,9 +94,9 @@ Here are more information about the features this template offers. Follow those 
 
 ### Project
 
-This repository is meant for the entire minor project. Everything from the demo to the final project is combined in the `main` branch. Major updates will recive a version tag along with a release package.
+This repository is meant for the entire minor project. Everything from the demo to the final project is combined in the `main` branch. Major updates will receive a version tag along with a release package.
 
-When merging a `Team branch` into `main` the Integration Team could move your work into the game main folder in order to connect everyones' work for the final game.
+When merging a `Team branch` into `main` the Integration Team could move your work into the game main folder in order to connect everyone's' work for the final game.
 
 ### Rules
 
@@ -107,7 +105,7 @@ Those are the rules everyone must follow for this repository:
 1. It is **NOT** allowed to work on the `main` branch
 2. Only Integration Team is allowed to modify and work on `main`
 3. Every team has their own `Team branch` and need to treat it as their main branch
-4. Team members can make new braches from their `Team branch`
+4. Team members can make new branches from their `Team branch`
 5. Pull requests to the `main branch` are allowed only from a `Team branch`
 6. Every commit **must** have a title and an exhaustive description
 
@@ -119,10 +117,9 @@ Those are the rules everyone must follow for this repository:
 We recommend Teams to create personal branches from their `Team branch` and merge their work into it before creating a pull request. \
 It is also up to each team to make sure they are up to date with `main` and notify other teams when their pull request gets accepted and merged into the main project.
 
-
 ## Support
 
-If you have any suggestions for improving this repository or you want to report something, feel free to open an issue here on GitHub. The Integration Team will make sure to answer you within 1 buisness day. Eventually you can also contact the Integration Team on Discord for any more urgent issues.
+If you have any suggestions for improving this repository or you want to report something, feel free to open an issue here on GitHub. The Integration Team will make sure to answer you within 1 business day. Eventually you can also contact the Integration Team on Discord for any more urgent issues.
 
 > [!NOTE]
 > This is a living document and may be updated in the future
