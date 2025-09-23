@@ -14,7 +14,7 @@
         /// This method is called on each frame of the state.
         /// </summary>
         public void OnUpdate();
-      
+
         /// <summary>
         /// This method is called on stop of the state.
         /// </summary>

@@ -18,7 +18,7 @@ namespace Core.Events
     /// <summary>
     /// To be removed later.
     /// </summary>
-    public class ExampleEvent : GameEvent 
+    public class ExampleEvent : GameEvent
     {
         private string _exampleField;
 
@@ -26,7 +26,7 @@ namespace Core.Events
         public string ExampleField => _exampleField;
 
 
-        public ExampleEvent(string exampleField) 
+        public ExampleEvent(string exampleField)
         {
             _exampleField = exampleField;
         }
