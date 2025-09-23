@@ -30,9 +30,3 @@ repos:
     rev: 3.0.0
     hooks:
       - id: forbid-binary
-
-  # C# formatting
-  - repo: https://github.com/dotnet/format
-    rev: v8.0.453106
-    hooks:
-      - id: dotnet-format
