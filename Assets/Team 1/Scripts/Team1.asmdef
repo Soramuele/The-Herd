@@ -2,7 +2,8 @@
     "name": "Team1",
     "rootNamespace": "",
     "references": [
-        "GUID:f9bbaa87255678746bdd891c6af7e0a7"
+        "GUID:f9bbaa87255678746bdd891c6af7e0a7",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
