@@ -50,4 +50,5 @@ jobs:
           title: "🤖 Auto-format C# code"
           body: "This PR was automatically created to apply C# code formatting standards."
           branch: auto-format-${{ github.ref_name }}
+          base: ${{ github.ref_name }}
           delete-branch: true
