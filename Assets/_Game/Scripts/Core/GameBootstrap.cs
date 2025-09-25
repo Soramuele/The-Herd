@@ -1,3 +1,5 @@
+using Gameplay.Dog;
+
 using UnityEngine;
 
 namespace Core
