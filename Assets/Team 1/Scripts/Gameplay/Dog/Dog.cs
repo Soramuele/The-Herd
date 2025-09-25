@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,6 +12,9 @@ namespace Gameplay.Dog
         private DogMovementController _movementController;
 
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Initialize()
         {
             _movementController = GetComponent<DogMovementController>();
