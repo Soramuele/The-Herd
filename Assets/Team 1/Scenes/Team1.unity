@@ -586,7 +586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273143744}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.37663957, y: 0.0016256153, z: -0.0006609441, w: 0.9263582}
+  m_LocalRotation: {x: 0.37663907, y: 0.0021857526, z: -0.0008886852, w: 0.9263571}
   m_LocalPosition: {x: 0, y: 11.9178, z: -8.3057995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -682,7 +682,6 @@ GameObject:
   - component: {fileID: 1813006612}
   - component: {fileID: 1813006615}
   - component: {fileID: 1813006616}
-  - component: {fileID: 1813006617}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -772,47 +771,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794052aed2a0b5d40bb0193b8ad4e285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InputActions:
-    m_Name: Input Actions
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 476bc3f8-a9d6-47f2-bd43-1fa8009b53c7
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
+  inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   walkSpeed: 2
   runSpeed: 5
   rotateSpeed: 5
---- !u!54 &1813006616
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813006610}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!136 &1813006617
-CapsuleCollider:
+  gravity: -9.81
+--- !u!143 &1813006616
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -826,14 +791,16 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
+  serializedVersion: 3
   m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Radius: 0.5000001
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1822241549
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,7 +828,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1822241549}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.37663954, y: 0.0016256154, z: -0.00066094415, w: 0.9263582}
+  m_LocalRotation: {x: 0.37663904, y: 0.0021857528, z: -0.00088868523, w: 0.9263571}
   m_LocalPosition: {x: 0, y: 10.399992, z: -9.51808}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
