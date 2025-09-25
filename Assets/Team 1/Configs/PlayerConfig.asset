@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb2998de81e417428ba63ea9fe983ca, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  _walkSpeed: 0
-  _runSpeed: 0
-  _rotationSpeed: 0
-  _gravity: 0
+  _walkSpeed: 2
+  _runSpeed: 6
+  _rotationSpeed: 10
+  _gravity: -9.81
