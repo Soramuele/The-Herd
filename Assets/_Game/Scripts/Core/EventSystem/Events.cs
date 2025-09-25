@@ -33,4 +33,22 @@ namespace Core.Events
     }
 
     #endregion EVENTS
+    
+    
+    
+    #region QUEST_EVENTS
+
+    public class QuestCompleteEvent : GameEvent
+    {
+        private string _questID;
+
+        public string QuestID => _questID;
+
+        public QuestCompleteEvent(string questID)
+        {
+            _questID = questID;
+        }
+    }
+    
+    #endregion QUEST_EVENTS
 }
