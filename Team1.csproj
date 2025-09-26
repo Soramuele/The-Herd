@@ -65,7 +65,6 @@
     <Compile Include="Assets\Team 1\Scripts\Gameplay\Dog\Dog.cs" />
     <Compile Include="Assets\Team 1\Scripts\Gameplay\Player\States\PlayerWalking.cs" />
     <Compile Include="Assets\Team 1\Scripts\Gameplay\Player\PlayerRotation.cs" />
-    <Compile Include="Assets\Team 1\Scripts\Core\IPlayerTool.cs" />
     <Compile Include="Assets\Team 1\Scripts\Gameplay\Player\States\PlayerIdle.cs" />
     <Compile Include="Assets\Team 1\Scripts\Gameplay\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Team 1\Scripts\Gameplay\Player\Player.cs" />
@@ -73,7 +72,9 @@
     <Compile Include="Assets\Team 1\Scripts\Gameplay\Dog\DogMovementController.cs" />
     <Compile Include="Assets\Team 1\Scripts\Gameplay\Player\PlayerInput.cs" />
     <Compile Include="Assets\Team 1\Scripts\Gameplay\Dog\DogConfig.cs" />
+    <Compile Include="Assets\Team 1\Scripts\Gameplay\ToolsSystem\ToolSlotsController.cs" />
     <Compile Include="Assets\Team 1\Scripts\Gameplay\Player\PlayerConfig.cs" />
+    <Compile Include="Assets\Team 1\Scripts\Core\Shared\Abstractions\IPlayerTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Team 1\Scripts\Team1.asmdef" />

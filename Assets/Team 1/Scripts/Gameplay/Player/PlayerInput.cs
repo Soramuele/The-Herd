@@ -14,6 +14,7 @@ namespace Gameplay.Player
         private InputAction _reloadAction;
         private InputAction _mainUsageAction;
         private InputAction _SecondaryUsageAction;
+        private InputAction _slotsScrollAction;
         #endregion InputActions
 
 
@@ -24,6 +25,7 @@ namespace Gameplay.Player
         public InputAction Reload => _reloadAction;
         public InputAction MainUsage => _mainUsageAction;
         public InputAction SecondaryUsage => _SecondaryUsageAction;
+        public InputAction SlotsScroll => _slotsScrollAction;
         #endregion InputActionProps
 
 
@@ -38,6 +40,7 @@ namespace Gameplay.Player
             _reloadAction = _inputActions.FindActionMap("Player").FindAction("Reload");
             _mainUsageAction = _inputActions.FindActionMap("Player").FindAction("MainUsage");
             _SecondaryUsageAction = _inputActions.FindActionMap("Player").FindAction("SecondaryUsage");
+            _slotsScrollAction = _inputActions.FindActionMap("Player").FindAction("SlotsScroll");
 
             // Enable input actions
             _moveAction.Enable();
@@ -46,6 +49,7 @@ namespace Gameplay.Player
             _reloadAction.Enable();
             _mainUsageAction.Enable();
             _SecondaryUsageAction.Enable();
+            _slotsScrollAction.Enable();
         }
     }
 }

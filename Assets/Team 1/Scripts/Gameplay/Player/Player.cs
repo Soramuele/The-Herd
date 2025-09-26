@@ -1,3 +1,5 @@
+using Gameplay.ToolsSystem;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,8 +32,11 @@ namespace Gameplay.Player
             PlayerRotation rotationController = GetComponent<PlayerRotation>();
             PlayerStateManager stateManager = GetComponent<PlayerStateManager>();
             PlayerInput playerInput = GetComponent<PlayerInput>();
+            ToolSlotsController slotsController = GetComponent<ToolSlotsController>();
 
             playerInput.Initialize(_inputActions);
+
+            slotsController.Initialize(playerInput, 3);
 
             CharacterController characterController = GetComponent<CharacterController>();
             movementController.Initialize(characterController, _config);
