@@ -1,0 +1,5 @@
+To implement this enemy you need to have a navmeshsurface on the ground.
+
+The script SpawnEnemy needs to be modified to have an actual spawncondition in the game, right now it is triggered by pressing E.
+
+The script SpawnEnemy needs to be on the player or on something on the players location to prevent the enemy from spawning too close to the player.
