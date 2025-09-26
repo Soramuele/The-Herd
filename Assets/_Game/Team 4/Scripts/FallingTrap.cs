@@ -1,28 +1,65 @@
+using System.Collections;
 using UnityEngine;
 
 public class FallingTrap : MonoBehaviour
 {
-    bool isFalling = false;
-    float downSpeed = 0;
+    private bool _isFalling = false;
+    private float _downSpeed = 0;
+    private Vector3 _startPosition;
 
+    /// <summary>
+    /// Initialize start position
+    /// </summary>
+    void Initialize()
+    {
+        this._startPosition = transform.position;
+    }
+
+    // Temp method to initialize
+    /*void Start()
+    {
+        Initialize();
+    }*/
+
+    /// <summary>
+    /// Handles collision with trap
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "sheep")
+        if (collision.gameObject.name == "sheep" && !_isFalling)
         {
-            // Start falling, delete trap and sheep after 10 seconds
-            isFalling = true;
-            Destroy(gameObject, 10f);
+            // Start falling, delete sheep after 10 seconds, move platform back
+            _isFalling = true;
             Destroy(collision.gameObject, 10f);
+            StartCoroutine(ResetTrap());
         }
     }
 
-    void Update()
+    /// <summary>
+    /// Update position if falling
+    /// </summary>
+    private void Update()
     {
-        if (isFalling)
+        if (_isFalling)
         {
             // Increase falling speed over time and move down
-            downSpeed += Time.deltaTime/10;
-            transform.position -= new Vector3(0, downSpeed, 0);
+            _downSpeed += Time.deltaTime/10;
+            transform.position -= new Vector3(0, _downSpeed, 0);
         }
+    }
+
+    /// <summary>
+    /// Reset trap position after delay
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator ResetTrap()
+    {
+        yield return new WaitForSeconds(10f);
+
+        // Reset position and state
+        transform.position = _startPosition;
+        _downSpeed = 0;
+        _isFalling = false;
     }
 }
