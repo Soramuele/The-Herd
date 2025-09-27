@@ -1,3 +1,5 @@
+using Core.Shared;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,7 +7,14 @@ namespace Gameplay.Player
 {
     public class PlayerInput : MonoBehaviour
     {
+        [SerializeField] LayerMask _groundLayers;
+
+
         private InputActionAsset _inputActions;
+        private Camera _mainCamera;
+
+        private readonly Observable<Vector3> _cursorWorldPosition = new Observable<Vector3>();
+
 
         #region InputActions
         private InputAction _moveAction;
@@ -15,23 +24,39 @@ namespace Gameplay.Player
         private InputAction _mainUsageAction;
         private InputAction _SecondaryUsageAction;
         private InputAction _slotsScrollAction;
+        private InputAction _slot1_Action;
+        private InputAction _slot2_Action;
+        private InputAction _slot3_Action;
         #endregion InputActions
 
 
         #region InputActionProps
         public Vector2 Move => _moveAction.ReadValue<Vector2>();
-        public Vector2 Look => _lookAction.ReadValue<Vector2>();
+
+        public Observable<Vector3> Look
+        {
+            get
+            {
+                UpdateCursorPositionInWorld();
+                return _cursorWorldPosition;
+            }
+        }
+
         public bool Run => _runAction.IsPressed();
         public InputAction Reload => _reloadAction;
         public InputAction MainUsage => _mainUsageAction;
         public InputAction SecondaryUsage => _SecondaryUsageAction;
         public InputAction SlotsScroll => _slotsScrollAction;
+        public InputAction Slot_1 => _slot1_Action;
+        public InputAction Slot_2 => _slot2_Action;
+        public InputAction Slot_3 => _slot3_Action;
         #endregion InputActionProps
 
 
         public void Initialize(InputActionAsset inputActions)
         {
             _inputActions = inputActions;
+            _mainCamera = Camera.main;
 
             // Get Input Actions
             _moveAction = _inputActions.FindActionMap("Player").FindAction("Move");
@@ -41,6 +66,9 @@ namespace Gameplay.Player
             _mainUsageAction = _inputActions.FindActionMap("Player").FindAction("MainUsage");
             _SecondaryUsageAction = _inputActions.FindActionMap("Player").FindAction("SecondaryUsage");
             _slotsScrollAction = _inputActions.FindActionMap("Player").FindAction("SlotsScroll");
+            _slot1_Action = _inputActions.FindActionMap("Player").FindAction("Slot_1");
+            _slot2_Action = _inputActions.FindActionMap("Player").FindAction("Slot_2");
+            _slot3_Action = _inputActions.FindActionMap("Player").FindAction("Slot_3");
 
             // Enable input actions
             _moveAction.Enable();
@@ -50,6 +78,23 @@ namespace Gameplay.Player
             _mainUsageAction.Enable();
             _SecondaryUsageAction.Enable();
             _slotsScrollAction.Enable();
+            _slot1_Action.Enable();
+            _slot2_Action.Enable();
+            _slot3_Action.Enable();
+        }
+
+
+        private void UpdateCursorPositionInWorld()
+        {
+            Ray ray = _mainCamera.ScreenPointToRay(_lookAction.ReadValue<Vector2>());
+
+            Vector3 worldCursorPosition;
+
+            Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, _groundLayers);
+            worldCursorPosition = hitInfo.point;
+            
+
+            _cursorWorldPosition.Value = worldCursorPosition;
         }
     }
 }

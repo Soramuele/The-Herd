@@ -10,14 +10,13 @@ namespace Gameplay.Player
     public class PlayerStateManager : CharacterStateManager<PlayerState>
     {
         public PlayerInput Input { get; private set; }
-        public PlayerMovement Movement { get; private set; }
         public PlayerRotation Rotation { get; private set; }
 
 
         public void Initialize(PlayerInput input, PlayerMovement movement, PlayerRotation playerRotation)
         {
             Input = input;
-            Movement = movement;
+            _movementController = movement;
             Rotation = playerRotation;
 
             InitializeStatesMap();

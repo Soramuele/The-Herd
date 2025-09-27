@@ -10,10 +10,6 @@ namespace Gameplay.Dog
     {
         private NavMeshAgent _agent;
         
-        private Transform _playerFollowPoint;
-        private Coroutine _playerFollowCoroutine;
-        private bool _isFollowingPlayer = true;
-
         private float _minSpeed;
         private float _maxSpeed;
         private float _baseSpeed;
@@ -22,17 +18,17 @@ namespace Gameplay.Dog
         private float _maxDistance;
 
 
+        public bool IsMoving => (_agent.hasPath || _agent.pathPending); 
+
+
         /// <summary>
         /// Initialization method.
         /// </summary>
         /// <param name="agent"></param>
         /// <param name="playerFollowPoint"></param>
-        public void Initialize(NavMeshAgent agent, Transform playerFollowPoint, DogConfig config)
+        public void Initialize(NavMeshAgent agent, DogConfig config)
         {
             _agent = agent;
-            _playerFollowPoint = playerFollowPoint;
-
-            _playerFollowCoroutine = StartCoroutine(FollowPlayer());
 
             _minSpeed = config.MinSpeed;
             _maxSpeed = config.MaxSpeed;
@@ -52,23 +48,14 @@ namespace Gameplay.Dog
             _agent.speed = _baseSpeed;
 
             _agent.destination = target;
+
         }
 
 
-        private IEnumerator FollowPlayer()
+        public void CalculateSpeedToPlayer()
         {
-            while (_isFollowingPlayer)
-            {
-                MoveTo(_playerFollowPoint.position);
-                float t = Mathf.InverseLerp(_slowDistance, _maxDistance, _agent.remainingDistance);
-                _agent.speed = Mathf.Lerp(_minSpeed, _maxSpeed, t);
-                yield return null;
-            }
-        }
-
-        private void OnDestroy()
-        {
-            StopAllCoroutines();
+            float t = Mathf.InverseLerp(_slowDistance, _maxDistance, _agent.remainingDistance);
+            _agent.speed = Mathf.Lerp(_minSpeed, _maxSpeed, t);
         }
     }
 }

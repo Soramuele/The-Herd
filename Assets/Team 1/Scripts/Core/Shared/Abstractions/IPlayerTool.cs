@@ -10,7 +10,7 @@ namespace Core.Shared
         /// <summary>
         /// Called when LMB pressed.
         /// </summary>
-        public abstract void MainUsageStarted();
+        public abstract void MainUsageStarted(Observable<Vector3> cursorWorldPosition);
         /// <summary>
         /// Called when LMB released.
         /// </summary>
@@ -24,7 +24,7 @@ namespace Core.Shared
         /// <summary>
         /// Called when RMB pressed.
         /// </summary>
-        public abstract void SecondaryUsageStarted();
+        public abstract void SecondaryUsageStarted(Observable<Vector3> cursorWorldPosition);
         /// <summary>
         /// Called when RMB released.
         /// </summary>

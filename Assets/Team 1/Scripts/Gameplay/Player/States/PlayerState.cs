@@ -8,18 +8,19 @@ namespace Gameplay.Player
     /// </summary>
     public abstract class PlayerState : IState
     {
-        protected PlayerStateManager _stateMachine;
+        protected readonly PlayerStateManager _manager;
+        protected readonly PlayerMovement _playerMovement;
 
 
-        public PlayerState(PlayerStateManager stateMachine)
+        public PlayerState(PlayerStateManager manager)
         {
-            _stateMachine = stateMachine;
+            _manager = manager;
+            _playerMovement = _manager.MovementController as PlayerMovement;
         }
 
 
         public abstract void OnStart();
         public abstract void OnStop();
         public abstract void OnUpdate();
-
     }
 }

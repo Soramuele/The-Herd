@@ -12,6 +12,7 @@ public class DogConfig : ScriptableObject
 
     [Space]
     [Header("Distance")]
+    [SerializeField] private float _distanceToPlayer;
     [SerializeField] private float _slowDistance;
     [SerializeField] private float _maxDistance;
 
@@ -21,6 +22,7 @@ public class DogConfig : ScriptableObject
     public float BaseSpeed => _baseSpeed;
     public float RotationSpeed => _rotationSpeed;
 
+    public float DistanceToPlayer => _distanceToPlayer;
     public float SlowDistance => _slowDistance;
     public float MaxDistance => _maxDistance;
 }

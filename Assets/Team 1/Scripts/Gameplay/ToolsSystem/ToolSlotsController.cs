@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Core.Shared;
-using Gameplay.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -33,6 +32,15 @@ namespace Gameplay.ToolsSystem
             _input.SecondaryUsage.canceled += OnCurrentToolSecondaryUseFinished;
 
             _input.SlotsScroll.started += UpdateCurrentSlot;
+
+            _input.Slot_1.started += (obj) => SetCurrentSlotByIndex(0);
+            _input.Slot_2.started += (obj) => SetCurrentSlotByIndex(1);
+            _input.Slot_3.started += (obj) => SetCurrentSlotByIndex(2);
+
+
+            // test
+            Whistle whistle = GetComponent<Whistle>();
+            SetNewToolToSlotByIndex(whistle, 0);
         }
 
 
@@ -40,15 +48,20 @@ namespace Gameplay.ToolsSystem
         {
             int inputValue = Mathf.RoundToInt(obj.action.ReadValue<Vector2>().y);
 
-            _currentToolIndex += inputValue;
-            _currentToolIndex = Mathf.Clamp(_currentToolIndex, 0, _slotsAmount);
+            SetCurrentSlotByIndex(_currentToolIndex + inputValue);
+        }
+
+        public void SetCurrentSlotByIndex(int index)
+        {
+            index = Mathf.Clamp(index, 0, _slotsAmount);
+            _currentToolIndex = index;
         }
 
 
         private void OnCurrentToolMainUseStarted(InputAction.CallbackContext obj)
         {
             if (_toolSlots[_currentToolIndex] != null)
-                _toolSlots[_currentToolIndex].MainUsageStarted();
+                _toolSlots[_currentToolIndex].MainUsageStarted(_input.Look);
         }
 
         private void OnCurrentToolMainUseFinished(InputAction.CallbackContext obj)
@@ -61,7 +74,7 @@ namespace Gameplay.ToolsSystem
         private void OnCurrentToolSecondaryUseStarted(InputAction.CallbackContext obj)
         {
             if (_toolSlots[_currentToolIndex] != null)
-                _toolSlots[_currentToolIndex].SecondaryUsageStarted();
+                _toolSlots[_currentToolIndex].SecondaryUsageStarted(_input.Look);
         }
 
         private void OnCurrentToolSecondaryUseFinished(InputAction.CallbackContext obj)
@@ -82,12 +95,6 @@ namespace Gameplay.ToolsSystem
         }
 
 
-        private void Update()
-        {
-            Debug.Log(_currentToolIndex + 1);
-        }
-
-
         private void OnDestroy()
         {
             _input.MainUsage.started -= OnCurrentToolMainUseStarted;
@@ -97,6 +104,10 @@ namespace Gameplay.ToolsSystem
             _input.SecondaryUsage.canceled -= OnCurrentToolSecondaryUseFinished;
 
             _input.SlotsScroll.started -= UpdateCurrentSlot;
+
+            _input.Slot_1.started -= (obj) => SetCurrentSlotByIndex(0);
+            _input.Slot_2.started -= (obj) => SetCurrentSlotByIndex(1);
+            _input.Slot_3.started -= (obj) => SetCurrentSlotByIndex(2);
         }
     }
 }

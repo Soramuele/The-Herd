@@ -18,11 +18,11 @@ namespace Gameplay.Player
 
         public override void OnUpdate()
         {
-            if (_stateMachine.Input.Move.magnitude > 0)
-                _stateMachine.SetState<PlayerWalking>();
+            if (_manager.Input.Move.magnitude > 0)
+                _manager.SetState<PlayerWalking>();
 
-            _stateMachine.Movement.ApplyGravity();
-            _stateMachine.Rotation.Rotate(_stateMachine.Input.Look, _stateMachine.Input.Move);
+            _playerMovement.ApplyGravity();
+            _manager.Rotation.Rotate(_manager.Input.Look.Value, _manager.Input.Move);
         }
     }
 }

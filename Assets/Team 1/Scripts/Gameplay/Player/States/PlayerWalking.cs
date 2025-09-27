@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Gameplay.Player
 {
@@ -19,15 +18,15 @@ namespace Gameplay.Player
 
         public override void OnUpdate()
         {
-            if (_stateMachine.Input.Move.magnitude == 0)
-                _stateMachine.SetState<PlayerIdle>();
+            if (_manager.Input.Move.magnitude == 0)
+                _manager.SetState<PlayerIdle>();
 
-            _stateMachine.Movement.ApplyGravity();
+            _playerMovement.ApplyGravity();
 
-            Vector3 movementTarget = _stateMachine.Movement.CalculateMovementTargetFromInput(_stateMachine.Input.Move, _stateMachine.Input.Run);
+            Vector3 movementTarget = _playerMovement.CalculateMovementTargetFromInput(_manager.Input.Move, _manager.Input.Run);
 
-            _stateMachine.Movement.MoveTo(movementTarget);
-            _stateMachine.Rotation.Rotate(_stateMachine.Input.Look, _stateMachine.Input.Move);
+            _playerMovement.MoveTo(movementTarget);
+            _manager.Rotation.Rotate(_manager.Input.Look.Value, _manager.Input.Move);
         }
     }
 }

@@ -34,4 +34,24 @@ namespace Core.Events
     }
 
     #endregion EVENTS
+
+    #region DOG_EVENTS
+    public class DogMoveCommandEvent : GameEvent
+    {
+        private Vector3 _moveTarget;
+
+
+        public Vector3 MoveTarget => _moveTarget;
+
+
+        public DogMoveCommandEvent(Vector3 moveTarget)
+        {
+            _moveTarget = moveTarget;
+        }
+    }
+
+    public class DogFollowCommandEvent : GameEvent
+    {
+    }
+    #endregion DOG_EVENTS
 }

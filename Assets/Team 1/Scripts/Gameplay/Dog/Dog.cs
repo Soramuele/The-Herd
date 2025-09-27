@@ -5,7 +5,7 @@ namespace Gameplay.Dog
 {
     public class Dog : MonoBehaviour
     {
-        [SerializeField] private Transform _playerFollowPoint;
+        [SerializeField] private Transform _playerTransform;
         [SerializeField] private DogConfig _config;
 
 
@@ -18,21 +18,17 @@ namespace Gameplay.Dog
         public void Initialize()
         {
             _movementController = GetComponent<DogMovementController>();
-
             NavMeshAgent agent = GetComponent<NavMeshAgent>();
+            _movementController.Initialize(agent, _config);
 
-            _movementController.Initialize(agent, _playerFollowPoint, _config);
+
+            DogStateManager stateManager = GetComponent<DogStateManager>();
+            stateManager.Initialize(_movementController, _playerTransform, _config);
         }
 
         void Start()
         {
             Initialize();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 
