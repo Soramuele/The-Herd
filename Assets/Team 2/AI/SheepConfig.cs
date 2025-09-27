@@ -18,6 +18,9 @@ namespace Core.AI.Sheep.Config
         [SerializeField] private float _separationWeight = 1.2f;
         [SerializeField] private float _alignmentWeight = 0.6f;
         [SerializeField] private float _steerClamp = 2.5f;
+        [SerializeField] private float _walkAwayFromHerdTicks = 2f; // This is a test timing and is open to change
+        [SerializeField] private float _maxLostDistanceFromHerd = 10f; // This is a test distance and is open to change
+
 
 
         //Getters
@@ -28,5 +31,7 @@ namespace Core.AI.Sheep.Config
         public float SeparationWeight => _separationWeight;
         public float AlignmentWeight => _alignmentWeight;
         public float SteerClamp => _steerClamp;
+        public float WalkAwayFromHerdTicks => _walkAwayFromHerdTicks;
+        public float MaxLostDistanceFromHerd => _maxLostDistanceFromHerd;
     }
 }

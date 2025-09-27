@@ -97,4 +97,47 @@ namespace Core.AI.Sheep
             return agent.remainingDistance <= REACH_THRESHOLD;
         }
     }
+
+    /// <summary>
+    /// Move outside the square (herd)
+    /// </summary>
+    public sealed class SheepWalkAwayFromHerdState : IState
+    {
+        private readonly SheepStateManager _stateManager;
+        private Vector3 _currentTarget;
+
+
+        public SheepWalkAwayFromHerdState(SheepStateManager context)
+        {
+            _stateManager = context;
+        }
+
+        public void OnStart()
+        {
+            if (_stateManager == null) return;
+
+            _currentTarget = _stateManager.GetTargetOutsideOfHerd();
+
+            if(_stateManager?.Agent != null)
+            {
+                _stateManager.Agent.isStopped = false;
+            }
+        }
+
+        public void OnUpdate()
+        {
+            if (_stateManager == null || _stateManager.Agent == null) return;
+            _stateManager.Agent.isStopped = false;
+            _stateManager.Agent.SetDestination(_currentTarget);
+
+        }
+
+        public void OnStop()
+        {
+            if(_stateManager?.Agent != null)
+            {
+                _stateManager.Agent.isStopped = true;
+            }
+        }
+    }
 }

@@ -6,8 +6,8 @@ using Core.Events;
 using Core.Shared.StateMachine;
 using Core.AI.Sheep.Config;
 using UnityEngine.AI;
-using NUnit.Framework;
-using UnityEngine.Rendering;
+
+using Random = UnityEngine.Random;
 
 namespace Core.AI.Sheep
 {
@@ -18,7 +18,8 @@ namespace Core.AI.Sheep
     public class SheepStateManager : CharacterStateManager<IState>
     {
         private const float DEFAULT_FOLLOW_DISTANCE = 1.8f;
-
+        private const float DEFAULT_MAX_LOST_DISTANCE_FROM_HERD = 10f; // This is a test distance and is open to change
+        private const float DEFAULT_WALK_AWAY_FROM_HERD_TICKS = 2f; // This is a test timing and is open to change
 
         [Header("Data")]
         [SerializeField]
@@ -37,9 +38,7 @@ namespace Core.AI.Sheep
         //Private
         private NavMeshAgent _agent;
         private Coroutine _tickCoroutine;
-        private IState _currentState;
-        private SheepFollowState _followState;
-        private SheepGrazeState _grazeState;
+        private float _nextWalkingAwayFromHerdAt;
 
         private Vector3 _playerCenter;
         private Vector3 _playerHalfExtents;
@@ -70,8 +69,7 @@ namespace Core.AI.Sheep
                 _agent.speed = _config.BaseSpeed;
             }
 
-            _followState = new SheepFollowState(this);
-            _grazeState = new SheepGrazeState(this);
+            InitializeStatesMap();
         }
 
         private void OnEnable()
@@ -79,7 +77,7 @@ namespace Core.AI.Sheep
             EventManager.AddListener<PlayerSquareChangedEvent>(OnPlayerSquareChanged);
             EventManager.AddListener<PlayerSquareTickEvent>(OnPlayerSquareTick);
 
-            SwitchState(_grazeState);
+            SetState<SheepGrazeState>();
 
             float interval = _config != null ? _config.Tick : 0.15f;
             _tickCoroutine = StartCoroutine(TickCoroutine(interval));
@@ -103,11 +101,10 @@ namespace Core.AI.Sheep
         {
             StatesMap = new Dictionary<Type, IState>
             {
-                {typeof(SheepFollowState), _followState},
-                {typeof(SheepGrazeState), _grazeState}
+                {typeof(SheepFollowState), new SheepFollowState(this)},
+                {typeof(SheepGrazeState), new SheepGrazeState(this)},
+                {typeof(SheepWalkAwayFromHerdState), new SheepWalkAwayFromHerdState(this)},
             };
-
-            SetState<SheepGrazeState>();
         }
 
         /// <summary>
@@ -131,38 +128,63 @@ namespace Core.AI.Sheep
             _playerCenter = e.Center;
             _playerHalfExtents = e.HalfExtents;
 
+            if (_currentState is SheepWalkAwayFromHerdState) return;
+
             //Decide on state
             bool outside = FlockingUtility.IsOutSquare(transform.position, _playerCenter, _playerHalfExtents);
-            var targetState = outside ? (IState)_followState : _grazeState;
+            var targetState = outside ? typeof(SheepFollowState) : typeof(SheepGrazeState);
 
-            if(!ReferenceEquals(_currentState, targetState))
-            {
-                SwitchState(targetState);
-            }
+            if(_currentState.GetType() == targetState) return;
+
+            SetState(targetState);
+
+        }
+
+
+        private void OnSheepCallBackToPlayerEvent()
+        {
+            SetState<SheepFollowState>();
         }
 
 
         private IEnumerator TickCoroutine(float interval)
         {
             var wait = new WaitForSeconds(interval);
-            while (true)
+
+            while(true)
             {
+                if (_currentState is not SheepWalkAwayFromHerdState && Time.time >= _nextWalkingAwayFromHerdAt)
+                {
+                    if (Random.value <= _archetype.GettingLostChance) SetState<SheepWalkAwayFromHerdState>();
+                    ScheduleNextWalkAwayFromHerd();
+                }
                 _currentState?.OnUpdate();
                 yield return wait;
             }
+
+        }
+
+        private void ScheduleNextWalkAwayFromHerd()
+        {
+            _nextWalkingAwayFromHerdAt = Time.time + _config?.WalkAwayFromHerdTicks ?? DEFAULT_WALK_AWAY_FROM_HERD_TICKS;
         }
 
 
-        private void SwitchState(IState next)
+        /// <summary>
+        /// Stops last state and starts new state.
+        /// </summary>
+        /// <param name="type">State to change to</param>
+        public virtual void SetState(Type type)
         {
             _currentState?.OnStop();
-            _currentState = next;
-            _currentState?.OnStart();
+
+            _currentState = StatesMap[type];
+            _currentState.OnStart();
         }
 
 
-        // ======== Helpers for states ========
-        
+        #region ======== Helpers for states ========
+
         /// <summary>
         /// Set destination with herding nudge
         /// </summary>
@@ -202,7 +224,7 @@ namespace Core.AI.Sheep
             Vector3 target = _playerCenter - dir * want;
 
             //Reduce stacking
-            target += Quaternion.Euler(0f, UnityEngine.Random.Range(-35f, 35f), 0f) * (Vector3.right * (want * 0.5f));
+            target += Quaternion.Euler(0f, Random.Range(-35f, 35f), 0f) * (Vector3.right * (want * 0.5f));
             return target;
         }
 
@@ -212,9 +234,26 @@ namespace Core.AI.Sheep
         public Vector3 GetGrazeTarget()
         {
             float step = Mathf.Max(0.2f, _archetype?.IdleWanderRadius ?? 1.0f);
-            Vector2 rand = UnityEngine.Random.insideUnitCircle * step;
+            Vector2 rand = Random.insideUnitCircle * step;
             return transform.position + new Vector3(rand.x, 0f, rand.y);
         }
+
+        /// <summary>
+        /// Picks a point to go to when leaving the herd.
+        /// </summary>
+        /// <returns></returns>
+        public Vector3 GetTargetOutsideOfHerd()
+        {
+            float maxLostDistanceFromHerd = _config?.MaxLostDistanceFromHerd ?? DEFAULT_MAX_LOST_DISTANCE_FROM_HERD;
+            Vector2 rand = Random.insideUnitCircle * maxLostDistanceFromHerd;
+            Vector3 playerHalf = new (rand.x < 0 ? _playerHalfExtents.x * -1 : _playerHalfExtents.x, 0f, rand.y < 0 ? _playerHalfExtents.z * -1 : _playerHalfExtents.z);
+            return transform.position  + playerHalf +  new Vector3(rand.x, 0f, rand.y);
+        }
+
+        #endregion
+
+
+
     }
 
 }

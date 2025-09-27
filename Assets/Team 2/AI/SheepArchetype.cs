@@ -10,6 +10,7 @@ namespace Core.AI.Sheep.Config
         [SerializeField] private float _skittishness = 0.0f;
         [SerializeField] private float _idleWanderRadius = 1.0f;
         [SerializeField] private float _followDistance = 1.8f;
+        [SerializeField] private float _gettingLostChance = 0.005f;
 
 
         [Header("Grazing interval in seconds")]
@@ -22,6 +23,7 @@ namespace Core.AI.Sheep.Config
         public float Skittishness => _skittishness;
         public float IdleWanderRadius => _idleWanderRadius;
         public float FollowDistance => _followDistance;
+        public float GettingLostChance => _gettingLostChance;
 
         public float GrazeIntervalMin => _grazeIntervalMin;
         public float GrazeIntervalMax => _grazeIntervalMax;
