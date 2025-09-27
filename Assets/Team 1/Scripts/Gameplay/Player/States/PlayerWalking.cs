@@ -2,11 +2,15 @@ using UnityEngine;
 
 namespace Gameplay.Player
 {
+    /// <summary>
+    /// Player is walking.
+    /// </summary>
     public class PlayerWalking : PlayerState
     {
         public PlayerWalking(PlayerStateManager stateMachine) : base(stateMachine)
         {
         }
+
 
         public override void OnStart()
         {

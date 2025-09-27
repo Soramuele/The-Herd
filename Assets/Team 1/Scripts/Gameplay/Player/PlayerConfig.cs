@@ -1,20 +1,42 @@
 using UnityEngine;
-
-[CreateAssetMenu(fileName = "PlayerConfig", menuName = "Configs/PlayerConfig")]
-public class PlayerConfig : ScriptableObject
+namespace Gameplay.Player
 {
-    [Header("Speed")]
-    [SerializeField] private float _walkSpeed;
-    [SerializeField] private float _runSpeed;
-    [SerializeField] private float _rotationSpeed;
+    /// <summary>
+    /// Config with all data related to controlls of the player.
+    /// </summary>
+    [CreateAssetMenu(fileName = "PlayerConfig", menuName = "Configs/PlayerConfig")]
+    public class PlayerConfig : ScriptableObject
+    {
+        [Header("Speed")]
+        [Tooltip("General speed of the player.")]
+        [SerializeField] private float _walkSpeed;
+        [Tooltip("Sprint speed of the player.")]
+        [SerializeField] private float _runSpeed;
+        [Tooltip("Rotation speed of the player.")]
+        [SerializeField] private float _rotationSpeed;
 
-    [Space]
-    [SerializeField] private float _gravity;
+        [Space]
+        [Tooltip("Gravity applied to the player.")]
+        [SerializeField] private float _gravity;
 
 
-    public float WalkSpeed => _walkSpeed;
-    public float RunSpeed => _runSpeed;
-    public float RotationSpeed => _rotationSpeed;
+        /// <summary>
+        /// General speed of the player.
+        /// </summary>
+        public float WalkSpeed => _walkSpeed;
+        /// <summary>
+        /// Sprint speed of the player.
+        /// </summary>
+        public float RunSpeed => _runSpeed;
+        /// <summary>
+        /// Rotation speed of the player.
+        /// </summary>
+        public float RotationSpeed => _rotationSpeed;
 
-    public float Gravity => _gravity;
+        /// <summary>
+        /// Gravity applied to the player.
+        /// </summary>
+        public float Gravity => _gravity;
+    }
 }
+

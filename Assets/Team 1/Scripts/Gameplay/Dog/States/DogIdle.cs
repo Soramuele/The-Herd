@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Gameplay.Dog
 {
+    /// <summary>
+    /// Dog is not moving.
+    /// </summary>
     public class DogIdle : DogState
     {
         private readonly Transform _player;
@@ -12,6 +15,8 @@ namespace Gameplay.Dog
         private Coroutine _delayCoroutine;
 
 
+        /// <param name="playerTransform">Transform of player object to follow.</param>
+        /// <param name="distanceToStartFollow">Distance between dog and player to start move.</param>
         public DogIdle(DogStateManager manager, Transform playerTransform, float distanceToStartFollow) : base(manager)
         {
             _player = playerTransform;
@@ -49,7 +54,7 @@ namespace Gameplay.Dog
             _manager.SetState<DogFollowPlayer>();
         }
 
-        public void OnTargetChanged()
+        private void OnTargetChanged()
         {
             _manager.SetState<DogMove>();
         }

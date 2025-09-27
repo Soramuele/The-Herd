@@ -2,11 +2,15 @@ using UnityEngine;
 
 namespace Gameplay.Player 
 {
+    /// <summary>
+    /// Player is staying.
+    /// </summary>
     public class PlayerIdle : PlayerState
     {
         public PlayerIdle(PlayerStateManager stateMachine) : base(stateMachine)
         {
         }
+
 
         public override void OnStart()
         {

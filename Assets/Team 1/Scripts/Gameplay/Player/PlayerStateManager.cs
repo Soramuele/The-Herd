@@ -5,14 +5,26 @@ using UnityEngine;
 namespace Gameplay.Player 
 {
     /// <summary>
-    /// Player state machine manager.
+    /// Player state machine.
     /// </summary>
     public class PlayerStateManager : CharacterStateManager<PlayerState>
     {
+        /// <summary>
+        /// Player input.
+        /// </summary>
         public PlayerInput Input { get; private set; }
+        /// <summary>
+        /// Player rotation class.
+        /// </summary>
         public PlayerRotation Rotation { get; private set; }
 
 
+        /// <summary>
+        /// Initialization method.
+        /// </summary>
+        /// <param name="input">Player input class.</param>
+        /// <param name="movement">Player movement class.</param>
+        /// <param name="playerRotation">Player rotation class.</param>
         public void Initialize(PlayerInput input, PlayerMovement movement, PlayerRotation playerRotation)
         {
             Input = input;

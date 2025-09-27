@@ -2,6 +2,10 @@
 
 namespace Core.Shared
 {
+    /// <summary>
+    /// Field, that have event on value changes. Can be any type.
+    /// </summary>
+    /// <typeparam name="T">Type of the field.</typeparam>
     public class Observable<T>
     {
         private T _value;

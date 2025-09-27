@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 namespace Gameplay.ToolsSystem
 {
+    /// <summary>
+    /// Handles logic of quick slots scrolling.
+    /// </summary>
     public class ToolSlotsController : MonoBehaviour
     {
         private List<IPlayerTool> _toolSlots = new List<IPlayerTool>();
@@ -14,6 +17,11 @@ namespace Gameplay.ToolsSystem
         private Gameplay.Player.PlayerInput _input;
 
 
+        /// <summary>
+        /// Initialization method.
+        /// </summary>
+        /// <param name="input">Player input class.</param>
+        /// <param name="slotsAmount">Max amount of available slots.</param>
         public void Initialize(Gameplay.Player.PlayerInput input, int slotsAmount)
         {
             _input = input;
@@ -51,7 +59,7 @@ namespace Gameplay.ToolsSystem
             SetCurrentSlotByIndex(_currentToolIndex + inputValue);
         }
 
-        public void SetCurrentSlotByIndex(int index)
+        private void SetCurrentSlotByIndex(int index)
         {
             index = Mathf.Clamp(index, 0, _slotsAmount);
             _currentToolIndex = index;

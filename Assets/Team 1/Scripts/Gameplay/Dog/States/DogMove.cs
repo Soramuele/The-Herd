@@ -3,14 +3,19 @@ using UnityEngine;
 
 namespace Gameplay.Dog
 {
+    /// <summary>
+    /// Dog moves to the target of command.
+    /// </summary>
     public class DogMove : DogState
     {
         private readonly DogMovementController _dogMovement;
+
 
         public DogMove(DogStateManager manager) : base(manager)
         {
             _dogMovement = _manager.MovementController as DogMovementController;
         }
+
 
         public override void OnStart()
         {

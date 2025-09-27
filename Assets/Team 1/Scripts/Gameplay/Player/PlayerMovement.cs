@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Gameplay.Player
 {
+    /// <summary>
+    /// Controls player movement.
+    /// </summary>
     public class PlayerMovement : MovementController
     {
         private CharacterController _controller;
@@ -15,6 +18,11 @@ namespace Gameplay.Player
         private float _verticalVelocity = 0f;
 
 
+        /// <summary>
+        /// Initialization method.
+        /// </summary>
+        /// <param name="characterController">Character controller of the player. Used for movement.</param>
+        /// <param name="config">Config of the player.</param>
         public void Initialize(CharacterController characterController, PlayerConfig config)
         {
             _camera = Camera.main;
@@ -32,6 +40,9 @@ namespace Gameplay.Player
         }
 
 
+        /// <summary>
+        /// Applies gravity to the player.
+        /// </summary>
         public void ApplyGravity()
         {
             // Apply gravity
@@ -48,6 +59,12 @@ namespace Gameplay.Player
         }
 
 
+        /// <summary>
+        /// Calculates where player should be moved according to input.
+        /// </summary>
+        /// <param name="moveInput">Input of the player.</param>
+        /// <param name="isRunning">Is player holding sprint button.</param>
+        /// <returns>Final destination of the player.</returns>
         public Vector3 CalculateMovementTargetFromInput(Vector2 moveInput, bool isRunning)
         {
             // Convert input to world space relative to camera

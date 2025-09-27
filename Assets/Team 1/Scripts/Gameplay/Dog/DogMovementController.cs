@@ -6,6 +6,9 @@ using UnityEngine.AI;
 
 namespace Gameplay.Dog 
 {
+    /// <summary>
+    /// Movement controller for the dog.
+    /// </summary>
     public class DogMovementController : MovementController
     {
         private NavMeshAgent _agent;
@@ -18,14 +21,17 @@ namespace Gameplay.Dog
         private float _maxDistance;
 
 
-        public bool IsMoving => (_agent.hasPath || _agent.pathPending); 
+        /// <summary>
+        /// True - dog is moving or pending the path, false - dog is in idle state.
+        /// </summary>
+        public bool IsMoving => (_agent.hasPath || _agent.pathPending);
 
 
         /// <summary>
         /// Initialization method.
         /// </summary>
-        /// <param name="agent"></param>
-        /// <param name="playerFollowPoint"></param>
+        /// <param name="agent">NavMeshAgent of the dog.</param>
+        /// <param name="config">Config of the dog.</param>
         public void Initialize(NavMeshAgent agent, DogConfig config)
         {
             _agent = agent;
@@ -52,6 +58,9 @@ namespace Gameplay.Dog
         }
 
 
+        /// <summary>
+        /// Changes speed of the dog depending on distance to hte player.
+        /// </summary>
         public void CalculateSpeedToPlayer()
         {
             float t = Mathf.InverseLerp(_slowDistance, _maxDistance, _agent.remainingDistance);

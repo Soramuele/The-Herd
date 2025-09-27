@@ -1,23 +1,21 @@
 using Gameplay.ToolsSystem;
-
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Gameplay.Player 
 {
+    /// <summary>
+    /// Base player script.
+    /// </summary>
     public class Player : MonoBehaviour
     {
-        [SerializeField] private Transform _dogFollowPoint;
+        [Tooltip("Reference to player config.")]
         [SerializeField] private PlayerConfig _config;
+        [Tooltip("Reference to input actions map.")]
         [SerializeField] private InputActionAsset _inputActions;
 
 
-        /// <summary>
-        /// Transform for dog AI to follow.
-        /// </summary>
-        public Transform DogFollowPoint => _dogFollowPoint;
-
-
+        // for test, needs to be moved to bootstrap
         private void Start()
         {
             Initialize();

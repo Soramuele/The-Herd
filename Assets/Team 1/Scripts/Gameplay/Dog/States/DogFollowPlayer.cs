@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Gameplay.Dog
 {
+    /// <summary>
+    /// Dog is moving to the player.
+    /// </summary>
     public class DogFollowPlayer : DogState
     {
         private readonly Transform _player;
@@ -12,6 +15,8 @@ namespace Gameplay.Dog
         private readonly DogMovementController _dogMovement;
 
 
+        /// <param name="playerTransform">Transform of player object to follow.</param>
+        /// <param name="distanceToStopFollow">Distance between dog and player to stop move.</param>
         public DogFollowPlayer(DogStateManager manager, Transform playerTransform, float distanceToStopFollow) : base(manager)
         {
             _player = playerTransform;
@@ -50,7 +55,7 @@ namespace Gameplay.Dog
         }
 
 
-        public void OnTargetChanged()
+        private void OnTargetChanged()
         {
             _manager.SetState<DogMove>();
         }

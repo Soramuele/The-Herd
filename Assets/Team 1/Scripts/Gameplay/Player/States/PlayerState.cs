@@ -12,6 +12,7 @@ namespace Gameplay.Player
         protected readonly PlayerMovement _playerMovement;
 
 
+        /// <param name="manager">Manager which uses this state.</param>
         public PlayerState(PlayerStateManager manager)
         {
             _manager = manager;

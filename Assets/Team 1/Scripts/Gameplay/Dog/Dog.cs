@@ -3,9 +3,14 @@ using UnityEngine.AI;
 
 namespace Gameplay.Dog
 {
+    /// <summary>
+    /// Main script for the dog.
+    /// </summary>
     public class Dog : MonoBehaviour
     {
+        [Tooltip("Transform of player object to follow.")]
         [SerializeField] private Transform _playerTransform;
+        [Tooltip("Config for the dog.")]
         [SerializeField] private DogConfig _config;
 
 
@@ -13,7 +18,7 @@ namespace Gameplay.Dog
 
 
         /// <summary>
-        /// 
+        /// Initialization method.
         /// </summary>
         public void Initialize()
         {
@@ -26,6 +31,7 @@ namespace Gameplay.Dog
             stateManager.Initialize(_movementController, _playerTransform, _config);
         }
 
+        // for test, needs to be moved to bootstrap
         void Start()
         {
             Initialize();
