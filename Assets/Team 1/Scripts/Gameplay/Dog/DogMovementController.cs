@@ -1,10 +1,12 @@
-using Core.Shared;
 using System;
 using System.Collections;
+
+using Core.Shared;
+
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Gameplay.Dog 
+namespace Gameplay.Dog
 {
     /// <summary>
     /// Movement controller for the dog.
@@ -12,7 +14,7 @@ namespace Gameplay.Dog
     public class DogMovementController : MovementController
     {
         private NavMeshAgent _agent;
-        
+
         private float _minSpeed;
         private float _maxSpeed;
         private float _baseSpeed;

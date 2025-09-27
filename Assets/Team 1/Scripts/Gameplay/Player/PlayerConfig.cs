@@ -39,4 +39,3 @@ namespace Gameplay.Player
         public float Gravity => _gravity;
     }
 }
-
